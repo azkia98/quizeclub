@@ -1,0 +1,38 @@
+.mh-img{
+    max-width: 160px;
+}
+
+.mh-img-medium{
+    max-width: 90px;
+}
+.mh-margin-top{
+    margin-top: 80px;
+}
+
+.mh-margin-bottom{
+    margin-bottom: 80px;
+}
+
+.mh-margin-top-min{
+    margin-top: 10px;
+}
+
+body.login{
+    background-image: url("/img/myimages/clouds.jpg");
+    background-size: cover;
+}
+
+.mh-center{
+    display: block;
+    margin: auto;
+}
+
+.mh-animate-fading{-webkit-animation:fading 5s infinite;animation:fading 5s infinite}
+.mh-hover-opacity-off:hover{opacity:1;transition: 1s;}
+.mh-opacity,.mh-hover-opacity:hover{opacity:0.60;transition: 500ms;}
+.mh-transition:hover{
+    transition: 1s;
+}
+.mh-decoration{
+    text-decoration: none !important;
+}
