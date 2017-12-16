@@ -19,9 +19,6 @@ Auth::routes();
 Route::view('/mh-login','client.login');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/fff',function(){
-    return 'hello world with git';
-});
 
 Route::namespace('Admin')->prefix('admin')->group(function (){
     $this->get('/','PanelController@index');
