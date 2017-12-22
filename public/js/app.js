@@ -6259,6 +6259,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var Exam = function () {
     function Exam() {
@@ -6290,15 +6301,18 @@ var Exam = function () {
             examObject: new Exam(),
             isshowExamTitle: true,
             courses: [],
-            selectedCourse: 0
+            selectedCourse: 0,
+            message: { title: '', show: false }
         };
     },
 
     methods: {
         sendExamData: function sendExamData() {
-            console.log(this.formData);
+            var _this = this;
+
             axios.post(Url + '/admin/exams', this.formData).then(function (res) {
-                return console.log(res);
+                _this.message.show = true;
+                _this.message.title = res.data.msg;
             });
         },
         editExamName: function editExamName(element) {
@@ -6312,7 +6326,6 @@ var Exam = function () {
         },
         setTrueAnswer: function setTrueAnswer(index) {
             this.answerInputNumber[index].isTrue = true;
-            console.log(index);
         },
         deleteInput: function deleteInput(index) {
             this.answerInputNumber.splice(index, 1);
@@ -6333,16 +6346,15 @@ var Exam = function () {
             this.question = '';
         },
         isTrueQuestion: function isTrueQuestion(answerIndex, questionIndex) {
-            console.log(this.questions[questionIndex].trueAnswer.includes(answerIndex));
             //                this.questions[index].trueAnswer.indexOf(index);
             return true;
         }
     },
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         axios.get(Url + '/admin/exams/create').then(function (res) {
-            return _this.courses = res.data.data;
+            return _this2.courses = res.data.data;
         });
     },
 
@@ -6370,6 +6382,35 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.message.show
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "w3-panel w3-green w3-display-container w3-margin-top"
+            },
+            [
+              _c(
+                "span",
+                {
+                  staticClass:
+                    "w3-button w3-green w3-large w3-display-topright",
+                  on: {
+                    click: function($event) {
+                      _vm.message.show = !_vm.message.show
+                    }
+                  }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("h3", [_vm._v("Success!")]),
+              _vm._v(" "),
+              _c("p", { domProps: { textContent: _vm._s(_vm.message.title) } })
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", [
         _c("div", {
           directives: [
