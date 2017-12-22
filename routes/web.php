@@ -25,4 +25,9 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
     $this->resource('categories','CategoriesController');
     $this->resource('courses','CoursesController');
     $this->resource('exams','ExamsController');
+
+    Route::prefix('ex')->group(function (){
+        $this->get('/shows','examController@showAll');
+    });
+
 });
