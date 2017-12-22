@@ -10,7 +10,7 @@
                 <td v-text="exam.content.title"></td>
                 <td v-text="exam.questionCount"></td>
                 <td>
-                    <button class="w3-btn" @click="startExam()"><i class="fa fa-play w3-text-green"></i></button>
+                    <button class="w3-btn" @click="startExam(exam.content.id)"><i class="fa fa-play w3-text-green"></i></button>
                 </td>
             </tr>
         </table>
@@ -24,9 +24,10 @@
                 exams:[]
             }
         },
-        methodes:{
-            startExam(){
-               $router.push('')
+        methods:{
+            startExam(examid){
+                location.href=`${Url}/admin/#/start/exam/${examid}`;
+//               this.$router.forward('startExam');
             }
         },
         mounted() {
