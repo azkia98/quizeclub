@@ -4758,7 +4758,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(4);
 
 
-var routes = [{ path: '/', component: __webpack_require__(5) }, { path: '/bar', template: '<div>Hello Bar</div>' }, { path: '/categories', component: __webpack_require__(23) }, { path: '/categories/:id/edit', component: __webpack_require__(26) }, { path: '/categories/create', component: __webpack_require__(29) }, { path: '/courses', component: __webpack_require__(32) }, { path: '/courses/:id/edit', component: __webpack_require__(35) }, { path: '/courses/create', component: __webpack_require__(38) }, { path: '/exams', component: __webpack_require__(41) }, { path: '/exams/create', component: __webpack_require__(44) }];
+var routes = [{ path: '/', component: __webpack_require__(5) }, { path: '/bar', template: '<div>Hello Bar</div>' }, { path: '/categories', component: __webpack_require__(23) }, { path: '/categories/:id/edit', component: __webpack_require__(26) }, { path: '/categories/create', component: __webpack_require__(29) }, { path: '/courses', component: __webpack_require__(32) }, { path: '/courses/:id/edit', component: __webpack_require__(35) }, { path: '/courses/create', component: __webpack_require__(38) }, { path: '/exams', component: __webpack_require__(41) }, { path: '/exams/create', component: __webpack_require__(44) }, { path: '/show/exams', component: __webpack_require__(101), name: 'showAllExam' // user can chose his exam
+}];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     routes: routes // short for `routes: routes`
@@ -48692,6 +48693,138 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(102)
+/* template */
+var __vue_template__ = __webpack_require__(103)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/exams/selectExam.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0c7b168d", Component.options)
+  } else {
+    hotAPI.reload("data-v-0c7b168d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 102 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", {}, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v("Exam Title")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Question title")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Start examination")])
+        ]),
+        _vm._v(" "),
+        _c("tr")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0c7b168d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

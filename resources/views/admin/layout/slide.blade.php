@@ -23,12 +23,6 @@
         <router-link class="w3-bar-item w3-button w3-padding mh-decoration" to="/courses/create"><i class="fa fa-plus-circle"></i> &nbsp;Create Course</router-link>
         <router-link class="w3-bar-item w3-button w3-padding mh-decoration" to="/exams"><i class="fa fa-paper-plane"></i> &nbsp;Exams</router-link>
         <router-link class="w3-bar-item w3-button w3-padding mh-decoration" to="/exams/create"><i class="fa fa-file-word-o w3-text-green"></i> &nbsp;Create new Exam</router-link>
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-users fa-fw"></i>&nbsp; Traffic</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-bullseye fa-fw"></i>&nbsp; Geo</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-diamond fa-fw"></i>&nbsp; Orders</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-bell fa-fw"></i>&nbsp; News</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-bank fa-fw"></i>&nbsp; General</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding mh-decoration"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a><br><br>--}}
+        <router-link class="w3-bar-item w3-button w3-padding mh-decoration" to="/show/exams"><i class="fa fa-file-word-o w3-text-red"></i> &nbsp;Show all exams</router-link>
     </div>
 </nav>

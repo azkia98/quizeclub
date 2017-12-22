@@ -12,7 +12,8 @@ const routes = [
     {path: '/courses/:id/edit',component:require('./components/admin/courses/EditCourseComponent.vue')},
     {path: '/courses/create',component:require('./components/admin/courses/CreateCourseComponent.vue')},
     {path: '/exams',component:require('./components/admin/exams/ExamsComponent.vue')},
-    {path: '/exams/create',component:require('./components/admin/exams/createExam.vue')}
+    {path: '/exams/create',component:require('./components/admin/exams/createExam.vue')},
+    {path:'/show/exams',component:require('./components/admin/exams/selectExam.vue'),name:'showAllExam'}   // user can chose his exam
 ];
 
 
