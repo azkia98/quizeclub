@@ -48780,10 +48780,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            exams: []
+        };
+    },
+
+    methodes: {
+        startExam: function startExam() {
+            $router.push('');
+        }
+    },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        var _this = this;
+
+        axios.get(Url + '/admin/ex/shows').then(function (res) {
+            _this.exams = res.data.data;
+        });
     }
 });
 
@@ -48795,25 +48814,51 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", {}, [
+    _c(
+      "table",
+      { staticClass: "w3-table-all" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.exams, function(exam) {
+          return _c("tr", [
+            _c("td", { domProps: { textContent: _vm._s(exam.content.title) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(exam.questionCount) } }),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "w3-btn",
+                  on: {
+                    click: function($event) {
+                      _vm.startExam()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-play w3-text-green" })]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("table", [
-        _c("tr", [
-          _c("td", [_vm._v("Exam Title")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("Question title")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("Start examination")])
-        ]),
-        _vm._v(" "),
-        _c("tr")
-      ])
+    return _c("tr", [
+      _c("td", [_vm._v("Exam Title")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Question count")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Start examination")])
     ])
   }
 ]

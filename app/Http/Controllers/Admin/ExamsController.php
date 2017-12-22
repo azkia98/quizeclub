@@ -26,6 +26,19 @@ class ExamsController extends Controller
         return Exam::with('questions')->paginate(3);
     }
 
+    public function showAll($course_id=1)
+    {
+        $exams=Exam::whereCourseId($course_id)->get();
+        $data=[];
+        foreach ($exams as $exam)
+        {
+            $data[]=['content'=>$exam,'questionCount'=>$exam->questions->count()];
+        }
+        return response()->json([
+            'data'=> $data
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,44 +46,43 @@ class ExamsController extends Controller
      */
     public function create()
     {
-        $courses=Course::all();
+        $courses = Course::all();
         return new CoursesCollection($courses);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //{"examName":"New Exam","questions":[{"title":"questions 1","answers":["answer1","answer2","answer3","answer4"],"trueAnswer":[0]}]}
 //        dd('fasd');
-        $exam=Exam::create([
-            'title'=>$request->examName,
-            'expiry'=>Carbon::now()->addMonth(1),
-            'course_id'=>$request->course_id
+        $exam = Exam::create([
+            'title' => $request->examName,
+            'expiry' => Carbon::now()->addMonth(1),
+            'course_id' => $request->course_id
         ]);
-        foreach ($request->questions as $question){
-            $initQuestion=$exam->questions()->create(['title'=>$question['title']]);
-            foreach($question['answers'] as $key => $answer)
-            {
-                $initAnswer=$initQuestion->answers()->create(['title'=>$answer]);
-                if(in_array($key,$question['trueAnswer']))
-                    $initAnswer->correctAnswer()->create(['isCorrect'=>true]);
+        foreach ($request->questions as $question) {
+            $initQuestion = $exam->questions()->create(['title' => $question['title']]);
+            foreach ($question['answers'] as $key => $answer) {
+                $initAnswer = $initQuestion->answers()->create(['title' => $answer]);
+                if (in_array($key, $question['trueAnswer']))
+                    $initAnswer->correctAnswer()->create(['isCorrect' => true]);
             }
         }
         return response()->json([
-            'msg'=>'success',
-            'status'=>'200'
+            'msg' => 'success',
+            'status' => '200'
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exam  $exam
+     * @param  \App\Models\Exam $exam
      * @return \Illuminate\Http\Response
      */
     public function show(Exam $exam)
@@ -81,7 +93,7 @@ class ExamsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exam  $exam
+     * @param  \App\Models\Exam $exam
      * @return \Illuminate\Http\Response
      */
     public function edit(Exam $exam)
@@ -92,8 +104,8 @@ class ExamsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exam  $exam
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Exam $exam
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Exam $exam)
@@ -104,7 +116,7 @@ class ExamsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exam  $exam
+     * @param  \App\Models\Exam $exam
      * @return \Illuminate\Http\Response
      */
     public function destroy(Exam $exam)
