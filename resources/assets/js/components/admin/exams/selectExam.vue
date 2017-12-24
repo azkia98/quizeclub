@@ -14,6 +14,9 @@
                 </td>
             </tr>
         </table>
+        <div class="w3-panel">
+            <v-select label="title" :on-change="showWithThisCategory"  v-model="selectedCourse" :options="courses"></v-select>
+        </div>
     </div>
 </template>
 
@@ -21,6 +24,8 @@
     export default {
         data(){
             return {
+                selectedCourse:null,
+                courses:[],
                 exams:[]
             }
         },
@@ -28,12 +33,19 @@
             startExam(examid){
                 location.href=`${Url}/admin/#/start/exam/${examid}`;
 //               this.$router.forward('startExam');
+            },
+            showWithThisCategory(val){
+                axios.get(`${Url}/admin/ex/shows/${val.id}`)
+                    .then(res=>{
+                        this.exams=res.data.data;
+                    });
             }
         },
         mounted() {
             axios.get(`${Url}/admin/ex/shows`)
                 .then(res=>{
                     this.exams=res.data.data;
+                    this.courses=res.data.courses;
                 });
         }
     }

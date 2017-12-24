@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\v1\Category;
 use App\Models\Course;
 use App\Models\Exam;
 use Carbon\Carbon;
@@ -35,7 +36,8 @@ class ExamsController extends Controller
             $data[]=['content'=>$exam,'questionCount'=>$exam->questions->count()];
         }
         return response()->json([
-            'data'=> $data
+            'data'=> $data,
+            'courses'=>Course::all()
         ]);
     }
 
@@ -87,7 +89,11 @@ class ExamsController extends Controller
      */
     public function show(Exam $exam)
     {
-        //
+        $data=[
+            'exam'=>$exam,
+            'questions'=>$exam->questions()->with('answers')->get(),
+        ];
+        return response()->json(['data'=>$data]);
     }
 
     /**

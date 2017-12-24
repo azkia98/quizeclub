@@ -16,6 +16,15 @@
 
 <script>
     export default {
+        data() {
+            return {
+                examName: {title: ''},
+                questions: [
+                    {title:'question1',answers:[]}
+                ]
+            }
+        }
+        ,
         mounted() {
             console.log(this.$route.params);
         }

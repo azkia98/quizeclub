@@ -22,7 +22,7 @@
     "slim-select": "^1.5.1",
     "vue-axios": "^2.0.2",
     "vue-router": "^3.0.1",
-    "vue-select": "^2.3.0"
+    "vue-select": "github:sagalbot/vue-select"
   },
   "name": "quizclub",
   "version": "1.0.0",
