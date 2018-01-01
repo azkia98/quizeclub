@@ -25,7 +25,8 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
     $this->resource('categories','CategoriesController');
     $this->resource('courses','CoursesController');
     $this->resource('exams','ExamsController');
-
+    $this->get('take/quiz/{exam_id?}','ExamsController@takeQuizExam');
+    $this->post('take/quiz/','ExamsController@saveTakedQuiz');
     Route::prefix('ex')->group(function (){
         $this->get('/shows/{course_id?}','ExamsController@showAll');
     });

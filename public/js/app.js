@@ -6892,16 +6892,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             examName: { title: '' },
-            questions: [{ title: 'question1', answers: [] }]
+            question: {},
+            answers: [],
+            selectedAnswer: null,
+            userAnswer: [],
+            isShowEndedButton: false,
+            paginate: {
+                nextPage: { url: '', pageNumber: 0 },
+                perPage: { url: '', pageNumber: 0 }
+            }
         };
     },
+
+    methods: {
+        endTheExam: function endTheExam() {
+            console.log('fdasf');
+            axios.post(Url + '/admin/take/quiz/', this.formData).then(function (res) {
+                return console.log(res);
+            });
+        },
+        selectAnswer: function selectAnswer(answerId, answerIndex) {
+            //                console.log('fasd', answerId, answerIndex, this.question.id, this.userAnswer.length);
+            this.selectedAnswer = answerIndex;
+            for (var i = 0; i < this.userAnswer.length; i++) {
+                if (this.userAnswer[i].question_id == this.question.id) {
+                    return 0;
+                }
+            }
+            var data = {
+                question_id: this.question.id,
+                answerId: answerId
+            };
+            this.userAnswer.push(data);
+        },
+        nextQuestion: function nextQuestion() {
+            this.selectedAnswer = null;
+            this.getData(this.paginate.nextPage.pageNumber);
+        },
+        prevQuestion: function prevQuestion() {
+            this.selectedAnswer = null;
+            this.getData(this.paginate.perPage.pageNumber);
+        },
+        getData: function getData(pageNumber) {
+            var _this = this;
+
+            axios.get(Url + '/admin/take/quiz/' + this.examId + '/?page=' + pageNumber).then(function (res) {
+                var total = res.data.data.question.total;
+                var current_page = res.data.data.question.current_page;
+
+                _this.examName.title = res.data.data.exam.title;
+                _this.question = res.data.data.question.data[0];
+                _this.answers = res.data.data.answers;
+                if (current_page == total) {
+                    _this.paginate.nextPage.url = _this.paginate.nextPage.url;
+                    _this.paginate.nextPage.pageNumber = _this.paginate.nextPage.pageNumber;
+                } else {
+                    _this.paginate.nextPage.url = res.data.data.question.next_page_url;
+
+                    _this.paginate.nextPage.pageNumber = ++res.data.data.question.current_page;
+                    res.data.data.question.current_page--;
+                }
+                if (res.data.data.question.current_page == 1) _this.paginate.perPage.pageNumber = res.data.data.question.per_page;else _this.paginate.perPage.pageNumber = --res.data.data.question.current_page;
+
+                _this.paginate.perPage.url = res.data.data.question.prev_page_url;
+            });
+        }
+    },
     mounted: function mounted() {
-        console.log(this.$route.params);
+        this.getData(1);
+    },
+
+    computed: {
+        examId: function examId() {
+            return this.$route.params.examid;
+        },
+        formData: function formData() {
+            var data = {
+                userAnswer: this.userAnswer
+            };
+            return data;
+        }
     }
 });
 
@@ -6913,32 +6994,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
+  return _c("div", [
+    _c("div", {
+      staticClass: "w3-padding w3-center w3-large",
+      domProps: { textContent: _vm._s(_vm.examName.title) }
+    }),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "w3-padding w3-green",
+      domProps: { textContent: _vm._s(_vm.question.title) }
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "w3-row-padding w3-margin-top" },
+      _vm._l(_vm.question.answers, function(answer, index) {
+        return _c("div", { staticClass: "w3-quarter" }, [
+          _c("p", {
+            staticClass: "w3-padding ",
+            class: [_vm.selectedAnswer == index ? "w3-yellow" : "w3-gray"],
+            domProps: { textContent: _vm._s(answer.title) },
+            on: {
+              dblclick: function($event) {
+                _vm.selectAnswer(answer.id, index)
+              }
+            }
+          })
         ])
-      ])
+      })
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "w3-bar w3-margin w3-center" }, [
+      _c(
+        "a",
+        {
+          staticClass: "w3-button mh-decoration",
+          attrs: { href: "#", title: _vm.paginate.perPage.pageNumber },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.prevQuestion()
+            }
+          }
+        },
+        [_vm._v("«")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "w3-button mh-decoration",
+          attrs: { href: "#", title: _vm.paginate.nextPage.pageNumber },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.nextQuestion()
+            }
+          }
+        },
+        [_vm._v("»")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "w3-center" }, [
+      _c(
+        "div",
+        {
+          staticClass: "w3-button w3-red w3-hover-shadow w3-hover-red",
+          on: {
+            click: function($event) {
+              _vm.endTheExam()
+            }
+          }
+        },
+        [_vm._v("End The Exam")]
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
